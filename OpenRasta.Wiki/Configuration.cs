@@ -9,19 +9,10 @@
 #endregion
 
 using System;
-using System.Collections.Generic;
-using OpenRasta.Codecs;
-using OpenRasta.Codecs.WebForms;
 using OpenRasta.Configuration;
-using OpenRasta.Configuration.WebForms;
+using OpenRasta.Configuration.Fluent;
 using OpenRasta.Wiki.Handlers;
 using OpenRasta.Wiki.Resources;
-using OpenRasta.DI;
-using OpenRasta.Reflection;
-using OpenRasta.Web;
-using OpenRasta.Web.Codecs;
-using OpenRasta.Web.UriDecorators;
-using OpenRasta.Web.Pipeline;
 
 namespace OpenRasta.Wiki
 {
@@ -31,12 +22,18 @@ namespace OpenRasta.Wiki
         {
             using (OpenRastaConfiguration.Manual)
             {
+
+
                 ResourceSpace.Has.ResourcesOfType<HomeResource>()
                     .AtUri("/home")
-                    .AndAt("/")
+                    .And.AtUri("/")
                     .HandledBy<HomeHandler>()
-                    .AndRenderedByAspx("~/Views/HomeView.aspx");
+                    .RenderedByAspx("~/Views/HomeView.aspx");
 
+                ResourceSpace.Has.ResourcesOfType<PageResource>()
+                    .AtUri("/page/{title}")
+                    .HandledBy<PageHandler>()
+                    .RenderedByAspx("~/Views/PageView.aspx");
             }
         }
     }
