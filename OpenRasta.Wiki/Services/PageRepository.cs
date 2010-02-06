@@ -2,6 +2,7 @@ using System;
 using Lucene.Net.Analysis;
 using Lucene.Net.Documents;
 using Lucene.Net.Index;
+using Lucene.Net.Search;
 using Lucene.Net.Store;
 using OpenRasta.Wiki.Resources;
 
@@ -26,7 +27,21 @@ namespace OpenRasta.Wiki.Services
 
         public PageResource Get(string title)
         {
-            return null;
+            if (IndexEmpty()) return null;
+
+            var query = new TermQuery(new Term("Title", title));
+            var searcher = new IndexSearcher(directory);
+            var hits = searcher.Search(query);
+
+            var document =  hits.Doc(0);
+            searcher.Close();
+
+            return new PageResource {Title = document.Get("Title"), Content = document.Get("Content")};
+        }
+
+        bool IndexEmpty()
+        {
+            return !IndexReader.IndexExists(directory);
         }
 
         public void Save(PageResource resource)
