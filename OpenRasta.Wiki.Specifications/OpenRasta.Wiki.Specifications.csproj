@@ -43,6 +43,10 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\lib\nunit.framework.dll</HintPath>
     </Reference>
+    <Reference Include="OpenRasta, Version=2.0.2069.364, Culture=neutral, PublicKeyToken=e04bf464d7caae73, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\Program Files\OpenRasta\2.0\net-35\OpenRasta.dll</HintPath>
+    </Reference>
     <Reference Include="Rhino.Mocks, Version=3.5.0.1337, Culture=neutral, PublicKeyToken=0b3305902db7183f, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\lib\Rhino.Mocks.dll</HintPath>
@@ -62,6 +66,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="FakeManager.cs" />
+    <Compile Include="Page\AlteringAPage.cs" />
+    <Compile Include="Page\DisplayingAPage.cs" />
     <Compile Include="Page\DisplayingAPageThatDoesNotExist.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Specification.cs" />

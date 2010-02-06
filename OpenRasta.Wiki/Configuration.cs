@@ -1,4 +1,5 @@
 #region License
+
 /* Authors:
  *      Sebastien Lambla (seb@serialseb.com)
  * Copyright:
@@ -6,13 +7,16 @@
  * License:
  *      This file is distributed under the terms of the MIT License found at the end of this file.
  */
+
 #endregion
 
 using System;
 using OpenRasta.Configuration;
 using OpenRasta.Configuration.Fluent;
+using OpenRasta.DI;
 using OpenRasta.Wiki.Handlers;
 using OpenRasta.Wiki.Resources;
+using OpenRasta.Wiki.Services;
 
 namespace OpenRasta.Wiki
 {
@@ -22,7 +26,7 @@ namespace OpenRasta.Wiki
         {
             using (OpenRastaConfiguration.Manual)
             {
-
+                ResourceSpace.Uses.CustomDependency<IPageRepository, PageRepository>(DependencyLifetime.Transient);
 
                 ResourceSpace.Has.ResourcesOfType<HomeResource>()
                     .AtUri("/home")
@@ -32,15 +36,20 @@ namespace OpenRasta.Wiki
 
                 ResourceSpace.Has.ResourcesOfType<PageResource>()
                     .AtUri("/page/{title}")
+                    .And.AtUri("/page/{title}/edit").Named("edit")
                     .HandledBy<PageHandler>()
-                    .RenderedByAspx("~/Views/PageView.aspx");
+                    .RenderedByAspx(new
+                                        {
+                                            index = "~/Views/PageView.aspx",
+                                            edit = "~/Views/PageEditView.aspx"
+                                        });
             }
         }
     }
-
 }
 
 #region Full license
+
 //
 // Permission is hereby granted, free of charge, to any person obtaining
 // a copy of this software and associated documentation files (the
@@ -61,4 +70,5 @@ namespace OpenRasta.Wiki
 // OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
+
 #endregion
