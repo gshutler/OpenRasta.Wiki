@@ -1,14 +1,14 @@
 ﻿<%@ Page Language="C#" Inherits="OpenRasta.Codecs.WebForms.ResourceView<HomeResource>" MasterPageFile="~/Views/HomeView.Master" %>
 
-<asp:Content ContentPlaceHolderID="ContentPlaceHolder1" ID="content" runat="server">
+<asp:Content ContentPlaceHolderID="Content" ID="content" runat="server">
     <div>
+        <h1>Welcome to the OpenRasta wiki</h1>
         <p>
-            Welcome to the OpenRasta wiki. To create a page goto "/page/{title}".        
+            To create a page goto "/{title}".        
         </p>
         <p>
             This page isn't editable as this is a simple example. There's
-            no authentication or anything, but there should eventually be
-            full text search which will be awesome!
+            no authentication or anything either.
         </p>
     </div>
 </asp:Content>

@@ -1,0 +1,41 @@
+﻿body
+{  
+  background-color: #7A95FF;
+  font-family: Verdana, Arial, Sans-Serif;
+}
+
+h1, h2, h3, h4, h5
+{
+  font-family: Georgia, Times New Roman, Serif; 
+}
+
+#content
+{
+  background-color: #FFF;
+  margin: auto;
+  margin-top: 2em;
+  padding: 1em 2em;
+  width: 50em;
+  text-align: left;  
+  -moz-border-radius: 1em;
+  -webkit-border-radius: 1em;
+  -opera-border-radius: 1em;
+  -khtml-border-radius: 1em;
+  border-radius: 1em;
+  -webkit-box-shadow: rgba(0,0,0,0.25) 0 0.5em 2em;
+  -moz-box-shadow: rgba(0,0,0,0.25) 0 0.5em 1em;
+  box-shadow: rgba(0,0,0,0.25) 0 0.5em 1em;
+}
+
+#edit
+{
+  margin: 1.2em 0 1em 0;
+}
+
+textarea
+{
+  width: 100%;
+  font-family: Courier New;
+  font-size: 1em;
+  height: 18em;
+}
