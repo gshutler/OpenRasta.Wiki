@@ -29,8 +29,12 @@ namespace OpenRasta.Wiki.Handlers
             return new PageResource { Title = title, Content = PageResource.DefaultContent };
         }
 
-        public OperationResult.SeeOther Post(PageResource resource)
+        // this would take a PageResource but there seems to be a binding bug in the version
+        // of OpenRasta that I'm using at this point in time
+        public OperationResult.SeeOther Post(string title, string content)
         {
+            var resource = new PageResource {Title = title, Content = content};
+
             pageRepository.Save(resource);
 
             var redirectLocation = uriResolver.CreateUriFor(context.ApplicationBaseUri, 

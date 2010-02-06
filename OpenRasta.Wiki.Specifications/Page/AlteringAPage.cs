@@ -30,14 +30,16 @@ namespace OpenRasta.Wiki.Specifications.Page
 
         protected override void When()
         {
-            result = Subject<PageHandler>().Post(resource);
+            result = Subject<PageHandler>().Post("title", "content");
         }
 
         [Then]
         public void ResourceSaved()
         {
-            Dependency<IPageRepository>()
-                .AssertWasCalled(x => x.Save(resource));
+            var savedPage = (PageResource) Dependency<IPageRepository>().GetArgumentsForCallsMadeOn(x => x.Save(null))[0][0];
+
+            Verify(savedPage.Title, Is.EqualTo("title"));
+            Verify(savedPage.Content, Is.EqualTo("content"));
         }
 
         [Then]

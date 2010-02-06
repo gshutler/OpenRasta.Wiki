@@ -4,7 +4,7 @@
     <h1>Edit: <%= Resource.Title %></h1>
     <div>
         <% using (scope(Xhtml.Form(Resource).Method("post"))) { %>            
-            <%= Xhtml.TextArea(() => Resource.Content) %>
+            <textarea name="content" cols="50" rows="20"><%= Resource.Content %></textarea>
             <input type="submit" value="Save" />
         <% } %>
     </div>
