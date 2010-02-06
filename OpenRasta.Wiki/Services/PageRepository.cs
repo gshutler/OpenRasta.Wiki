@@ -33,6 +33,12 @@ namespace OpenRasta.Wiki.Services
             var searcher = new IndexSearcher(directory);
             var hits = searcher.Search(query);
 
+            if (hits.Length() == 0)
+            {
+                searcher.Close();
+                return null;
+            }
+
             var document =  hits.Doc(0);
             searcher.Close();
 

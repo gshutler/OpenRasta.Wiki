@@ -72,6 +72,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repository\GettingAPageResource.cs" />
     <Compile Include="Repository\GettingAPageResourceFromAnEmptyDirectory.cs" />
+    <Compile Include="Repository\GettingAPageResourceThatDoesNotExist.cs" />
     <Compile Include="Repository\RepositorySpecification.cs" />
     <Compile Include="Repository\SavingANewPage.cs" />
     <Compile Include="Repository\SavingAPageWithAnExistingDocument.cs" />

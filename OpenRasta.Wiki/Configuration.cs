@@ -11,12 +11,18 @@
 #endregion
 
 using System;
+using System.IO;
+using System.Web;
+using Lucene.Net.Analysis;
+using Lucene.Net.Analysis.Standard;
+using Lucene.Net.Store;
 using OpenRasta.Configuration;
 using OpenRasta.Configuration.Fluent;
 using OpenRasta.DI;
 using OpenRasta.Wiki.Handlers;
 using OpenRasta.Wiki.Resources;
 using OpenRasta.Wiki.Services;
+using Directory=Lucene.Net.Store.Directory;
 
 namespace OpenRasta.Wiki
 {
@@ -26,6 +32,8 @@ namespace OpenRasta.Wiki
         {
             using (OpenRastaConfiguration.Manual)
             {
+                ResourceSpace.Uses.Resolver.AddDependencyInstance(typeof(Directory), FileDirectory(), DependencyLifetime.Singleton);
+                ResourceSpace.Uses.CustomDependency<Analyzer, StandardAnalyzer>(DependencyLifetime.Singleton);
                 ResourceSpace.Uses.CustomDependency<IPageRepository, PageRepository>(DependencyLifetime.Transient);
 
                 ResourceSpace.Has.ResourcesOfType<HomeResource>()
@@ -35,8 +43,8 @@ namespace OpenRasta.Wiki
                     .RenderedByAspx("~/Views/HomeView.aspx");
 
                 ResourceSpace.Has.ResourcesOfType<PageResource>()
-                    .AtUri("/page/{title}")
-                    .And.AtUri("/page/{title}/edit").Named("edit")
+                    .AtUri("/{title}")
+                    .And.AtUri("/{title}/edit").Named("edit")
                     .HandledBy<PageHandler>()
                     .RenderedByAspx(new
                                         {
@@ -44,6 +52,20 @@ namespace OpenRasta.Wiki
                                             edit = "~/Views/PageEditView.aspx"
                                         });
             }
+        }
+
+        static FSDirectory FileDirectory()
+        {
+            var appDataPath = AppDomain.CurrentDomain.GetData("DataDirectory").ToString();
+            var luceneDirectory = Path.Combine(appDataPath, "lucene");
+
+            if (System.IO.Directory.Exists(luceneDirectory))
+            {
+                return FSDirectory.GetDirectory(luceneDirectory);
+            }
+
+            System.IO.Directory.CreateDirectory(luceneDirectory);
+            return FSDirectory.GetDirectory(luceneDirectory, true);
         }
     }
 }
