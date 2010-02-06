@@ -32,13 +32,23 @@ namespace OpenRasta.Wiki.Services
         public void Save(PageResource resource)
         {
             var writer = new IndexWriter(directory, analyzer);
+            var document = CreateDocument(resource);
+
+            writer.DeleteDocuments(new Term("Title", resource.Title));
+            writer.AddDocument(document);
+
+            writer.Flush();
+            writer.Close();
+        }
+
+        static Document CreateDocument(PageResource resource)
+        {
             var document = new Document();
 
             document.Add(new Field("Title", resource.Title, Field.Store.YES, Field.Index.UN_TOKENIZED));
             document.Add(new Field("Content", resource.Content, Field.Store.YES, Field.Index.TOKENIZED));
 
-            writer.AddDocument(document);
-            writer.Flush();
+            return document;
         }
     }
 }

@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Lucene.Net.Analysis;
 using Lucene.Net.Analysis.Standard;
@@ -23,16 +24,18 @@ namespace OpenRasta.Wiki.Specifications.Repository
             directory = null;
         }
 
-        protected IEnumerable<Document> GetDocuments(Term term)
+        protected Document GetDocument(Term term)
         {
             var query = new TermQuery(term);
             var searcher = new IndexSearcher(directory);
             var hits = searcher.Search(query);
 
-            for (var doc = 0; doc < hits.Length(); doc++)
+            if (hits.Length() != 1)
             {
-                yield return hits.Doc(doc);
+                throw new Exception("Expected 1 document but found " + hits.Length());
             }
+
+            return hits.Doc(0);
         }
     }
 }

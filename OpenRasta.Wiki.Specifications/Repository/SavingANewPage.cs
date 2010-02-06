@@ -24,7 +24,7 @@ namespace OpenRasta.Wiki.Specifications.Repository
         [Then]
         public void DocumentSavedToTheDirectory()
         {
-            var document = GetDocuments(new Term("Title", "Something")).Single();
+            var document = GetDocument(new Term("Title", "Something"));
 
             Verify(document.Get("Title"), Is.EqualTo("Something"));
             Verify(document.Get("Content"), Is.EqualTo("Description"));
