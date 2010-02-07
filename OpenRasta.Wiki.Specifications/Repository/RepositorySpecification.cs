@@ -6,6 +6,8 @@ using Lucene.Net.Documents;
 using Lucene.Net.Index;
 using Lucene.Net.Search;
 using Lucene.Net.Store;
+using OpenRasta.Wiki.Resources;
+using OpenRasta.Wiki.Services;
 
 namespace OpenRasta.Wiki.Specifications.Repository
 {
@@ -36,6 +38,11 @@ namespace OpenRasta.Wiki.Specifications.Repository
             }
 
             return hits.Doc(0);
+        }
+
+        protected void SavePageResource(string title, string content)
+        {
+            Subject<PageRepository>().Save(new PageResource {Title = title, Content = content, TransformedContent = content});
         }
     }
 }

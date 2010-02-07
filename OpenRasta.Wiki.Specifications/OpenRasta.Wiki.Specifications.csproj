@@ -76,6 +76,8 @@
     <Compile Include="Repository\RepositorySpecification.cs" />
     <Compile Include="Repository\SavingANewPage.cs" />
     <Compile Include="Repository\SavingAPageWithAnExistingDocument.cs" />
+    <Compile Include="Repository\SearchingPageResources.cs" />
+    <Compile Include="Search\SubmittingAValidQuery.cs" />
     <Compile Include="Specification.cs" />
     <Compile Include="ThenAttribute.cs" />
   </ItemGroup>

@@ -57,6 +57,12 @@ namespace OpenRasta.Wiki
                                             index = "~/Views/PageView.aspx",
                                             edit = "~/Views/PageEditView.aspx"
                                         });
+
+                ResourceSpace.Has.ResourcesOfType<SearchResultsResource>()
+                    .AtUri("/search")
+                    .And.AtUri("/search/{query}")
+                    .HandledBy<SearchHandler>()
+                    .RenderedByAspx("~/Views/SearchResultsView.aspx");
             }
         }
 
