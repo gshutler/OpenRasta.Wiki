@@ -26,6 +26,10 @@ namespace OpenRasta.Wiki.Specifications.Page
             Dependency<IUriResolver>()
                 .Stub(x => x.CreateUriFor(baseUri, typeof(PageResource), null, resource.ToNameValueCollection()))
                 .Return(pageUri);
+
+            Dependency<IMarkdown>()
+                .Stub(x => x.Transform("content"))
+                .Return("transformed content");
         }
 
         protected override void When()
@@ -40,6 +44,7 @@ namespace OpenRasta.Wiki.Specifications.Page
 
             Verify(savedPage.Title, Is.EqualTo("title"));
             Verify(savedPage.Content, Is.EqualTo("content"));
+            Verify(savedPage.TransformedContent, Is.EqualTo("transformed content"));
         }
 
         [Then]

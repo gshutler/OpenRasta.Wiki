@@ -38,6 +38,10 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\lib\Lucene.Net.dll</HintPath>
     </Reference>
+    <Reference Include="MarkdownSharp, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\lib\MarkdownSharp.dll</HintPath>
+    </Reference>
     <Reference Include="OpenRasta">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>$(ProgramFiles32)\OpenRasta\2.0\net-35\OpenRasta.dll</HintPath>
@@ -97,6 +101,7 @@
     <Compile Include="Resources\HomeResource.cs" />
     <Compile Include="Resources\NewPageResource.cs" />
     <Compile Include="Resources\PageResource.cs" />
+    <Compile Include="Services\MarkdownWrapper.cs" />
     <Compile Include="Services\PageRepository.cs" />
   </ItemGroup>
   <ItemGroup>

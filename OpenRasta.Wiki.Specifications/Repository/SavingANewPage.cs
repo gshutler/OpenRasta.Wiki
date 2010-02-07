@@ -1,5 +1,4 @@
 using System;
-using System.Linq;
 using Lucene.Net.Index;
 using NUnit.Framework;
 using OpenRasta.Wiki.Resources;
@@ -13,7 +12,12 @@ namespace OpenRasta.Wiki.Specifications.Repository
 
         protected override void Given()
         {
-            resource = new PageResource {Title = "Something", Content = "Description"};
+            resource = new PageResource
+                           {
+                               Title = "Something", 
+                               Content = "Description", 
+                               TransformedContent = "Transformed description"
+                           };
         }
 
         protected override void When()
@@ -28,6 +32,7 @@ namespace OpenRasta.Wiki.Specifications.Repository
 
             Verify(document.Get("Title"), Is.EqualTo("Something"));
             Verify(document.Get("Content"), Is.EqualTo("Description"));
+            Verify(document.Get("TransformedContent"), Is.EqualTo("Transformed description"));
         }
     }
 }

@@ -15,6 +15,7 @@ using System.IO;
 using Lucene.Net.Analysis;
 using Lucene.Net.Analysis.Standard;
 using Lucene.Net.Store;
+using MarkdownSharp;
 using OpenRasta.Configuration;
 using OpenRasta.DI;
 using OpenRasta.Wiki.Handlers;
@@ -30,6 +31,9 @@ namespace OpenRasta.Wiki
         {
             using (OpenRastaConfiguration.Manual)
             {
+                ResourceSpace.Uses.Resolver.AddDependencyInstance(typeof(Markdown), new Markdown(), DependencyLifetime.Singleton);
+                ResourceSpace.Uses.CustomDependency<IMarkdown, MarkdownWrapper>(DependencyLifetime.Singleton);
+
                 ResourceSpace.Uses.Resolver.AddDependencyInstance(typeof(Directory), FileDirectory(), DependencyLifetime.Singleton);
                 ResourceSpace.Uses.CustomDependency<Analyzer, StandardAnalyzer>(DependencyLifetime.Singleton);
                 ResourceSpace.Uses.CustomDependency<IPageRepository, PageRepository>(DependencyLifetime.Transient);

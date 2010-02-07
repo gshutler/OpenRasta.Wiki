@@ -11,7 +11,14 @@ namespace OpenRasta.Wiki.Specifications.Repository
 
         protected override void Given()
         {
-            Subject<PageRepository>().Save(new PageResource {Title = "Unrelated", Content = "Content"});
+            var page = new PageResource
+                           {
+                               Title = "Unrelated", 
+                               Content = "Content",
+                               TransformedContent = "Transformed content"
+                           };
+
+            Subject<PageRepository>().Save(page);
         }
 
         protected override void When()

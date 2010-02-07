@@ -11,12 +11,14 @@ namespace OpenRasta.Wiki.Handlers
         readonly IPageRepository pageRepository;
         readonly ICommunicationContext context;
         readonly IUriResolver uriResolver;
+        readonly IMarkdown markdown;
 
-        public PageHandler(IPageRepository pageRepository, ICommunicationContext context, IUriResolver uriResolver)
+        public PageHandler(IPageRepository pageRepository, ICommunicationContext context, IUriResolver uriResolver, IMarkdown markdown)
         {
             this.pageRepository = pageRepository;
             this.context = context;
             this.uriResolver = uriResolver;
+            this.markdown = markdown;
         }
 
         public object Get(string title)
@@ -32,7 +34,13 @@ namespace OpenRasta.Wiki.Handlers
         // of OpenRasta that I'm using at this point in time
         public OperationResult.SeeOther Post(string title, string content)
         {
-            var resource = new PageResource {Title = title, Content = content};
+            var resource = new PageResource
+                               {
+                                   Title = title, 
+                                   Content = content,
+                                   TransformedContent = markdown.Transform(content)
+                               };
+            
 
             pageRepository.Save(resource);
 

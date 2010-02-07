@@ -6,5 +6,6 @@ namespace OpenRasta.Wiki.Resources
     {
         public string Title { get; set; }
         public string Content { get; set; }
+        public string TransformedContent { get; set; }
     }
 }

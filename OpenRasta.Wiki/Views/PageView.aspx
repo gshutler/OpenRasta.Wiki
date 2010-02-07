@@ -3,7 +3,7 @@
 <asp:Content ContentPlaceHolderID="Content" ID="content" runat="server">
     <h1><%= Resource.Title %></h1>
     <div id="pageContent">
-        <%= Resource.Content %>
+        <%=(r) Resource.TransformedContent %>
     </div>
     <div id="edit">
         <a href="<%= Resource.CreateUri("edit") %>">

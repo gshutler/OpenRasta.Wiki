@@ -42,7 +42,12 @@ namespace OpenRasta.Wiki.Services
             var document =  hits.Doc(0);
             searcher.Close();
 
-            return new PageResource {Title = document.Get("Title"), Content = document.Get("Content")};
+            return new PageResource
+                       {
+                           Title = document.Get("Title"), 
+                           Content = document.Get("Content"),
+                           TransformedContent = document.Get("TransformedContent")
+                       };
         }
 
         bool IndexEmpty()
@@ -68,6 +73,7 @@ namespace OpenRasta.Wiki.Services
 
             document.Add(new Field("Title", resource.Title, Field.Store.YES, Field.Index.UN_TOKENIZED));
             document.Add(new Field("Content", resource.Content, Field.Store.YES, Field.Index.TOKENIZED));
+            document.Add(new Field("TransformedContent", resource.TransformedContent, Field.Store.YES, Field.Index.NO));
 
             return document;
         }

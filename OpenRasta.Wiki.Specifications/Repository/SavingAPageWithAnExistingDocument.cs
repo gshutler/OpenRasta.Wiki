@@ -12,8 +12,19 @@ namespace OpenRasta.Wiki.Specifications.Repository
 
         protected override void Given()
         {
-            var oldPageResource = new PageResource {Title = "Something", Content = "Old Content"};
-            newPageResource = new PageResource {Title = "Something", Content = "New Content"};
+            var oldPageResource = new PageResource
+                                      {
+                                          Title = "Something", 
+                                          Content = "Old Content",
+                                          TransformedContent = "Transformed old content"
+                                      };
+
+            newPageResource = new PageResource
+                                  {
+                                      Title = "Something", 
+                                      Content = "New Content",
+                                      TransformedContent = "Transformed new content"
+                                  };
 
             Subject<PageRepository>().Save(oldPageResource);
         }
@@ -30,6 +41,7 @@ namespace OpenRasta.Wiki.Specifications.Repository
 
             Verify(document.Get("Title"), Is.EqualTo("Something"));
             Verify(document.Get("Content"), Is.EqualTo("New Content"));
+            Verify(document.Get("TransformedContent"), Is.EqualTo("Transformed new content"));
         }
     }
 }

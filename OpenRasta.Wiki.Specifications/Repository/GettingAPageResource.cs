@@ -12,7 +12,12 @@ namespace OpenRasta.Wiki.Specifications.Repository
 
         protected override void Given()
         {
-            savedPage = new PageResource {Title = "Title", Content = "Content"};
+            savedPage = new PageResource
+                            {
+                                Title = "Title", 
+                                Content = "Content",
+                                TransformedContent = "Transformed content"
+                            };
 
             Subject<PageRepository>().Save(savedPage);
         }
@@ -32,6 +37,12 @@ namespace OpenRasta.Wiki.Specifications.Repository
         public void RetrievedPageHasSavedContent()
         {
             Verify(retrievedPage.Content, Is.EqualTo(savedPage.Content));
+        }
+
+        [Then]
+        public void RetrievedPageHasSavedTransformedContent()
+        {
+            Verify(retrievedPage.TransformedContent, Is.EqualTo(savedPage.TransformedContent));
         }
     }
 }
