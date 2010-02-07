@@ -21,7 +21,7 @@ namespace OpenRasta.Wiki.Specifications.Page
 
         protected override void When()
         {
-            resource = Subject<PageHandler>().Get("existingPage");
+            resource = (PageResource) Subject<PageHandler>().Get("existingPage");
         }
 
         [Then]

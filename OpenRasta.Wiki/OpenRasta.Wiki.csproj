@@ -83,6 +83,7 @@
   <ItemGroup>
     <Content Include="Content\style.css" />
     <Content Include="default.aspx" />
+    <Content Include="Views\NewPageView.aspx" />
     <Content Include="Views\PageEditView.aspx" />
     <Content Include="Views\PageView.aspx" />
     <Content Include="Views\HomeView.aspx" />
@@ -94,6 +95,7 @@
     <Compile Include="Handlers\PageHandler.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Resources\HomeResource.cs" />
+    <Compile Include="Resources\NewPageResource.cs" />
     <Compile Include="Resources\PageResource.cs" />
     <Compile Include="Services\PageRepository.cs" />
   </ItemGroup>

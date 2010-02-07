@@ -1,10 +1,7 @@
-using System;
-
 namespace OpenRasta.Wiki.Resources
 {
-    public class PageResource
+    public class NewPageResource
     {
         public string Title { get; set; }
-        public string Content { get; set; }
     }
 }

@@ -7,7 +7,7 @@ namespace OpenRasta.Wiki.Specifications.Page
 {
     public class DisplayingAPageThatDoesNotExist : Specification
     {
-        PageResource resource;
+        NewPageResource resource;
 
         protected override void Given()
         {
@@ -15,19 +15,13 @@ namespace OpenRasta.Wiki.Specifications.Page
 
         protected override void When()
         {
-            resource = Subject<PageHandler>().Get("newTitle");
+            resource = (NewPageResource) Subject<PageHandler>().Get("newTitle");
         }
 
         [Then]
         public void ResourceHasGivenTitle()
         {
             Verify(resource.Title, Is.EqualTo("newTitle"));
-        }
-
-        [Then]
-        public void ResourceHasDefaultContent()
-        {
-            Verify(resource.Content, Is.EqualTo(PageResource.DefaultContent));
         }
     }
 }

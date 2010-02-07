@@ -12,12 +12,10 @@
 
 using System;
 using System.IO;
-using System.Web;
 using Lucene.Net.Analysis;
 using Lucene.Net.Analysis.Standard;
 using Lucene.Net.Store;
 using OpenRasta.Configuration;
-using OpenRasta.Configuration.Fluent;
 using OpenRasta.DI;
 using OpenRasta.Wiki.Handlers;
 using OpenRasta.Wiki.Resources;
@@ -41,6 +39,10 @@ namespace OpenRasta.Wiki
                     .And.AtUri("/")
                     .HandledBy<HomeHandler>()
                     .RenderedByAspx("~/Views/HomeView.aspx");
+
+                ResourceSpace.Has.ResourcesOfType<NewPageResource>()
+                    .WithoutUri
+                    .RenderedByAspx("~/Views/NewPageView.aspx");
 
                 ResourceSpace.Has.ResourcesOfType<PageResource>()
                     .AtUri("/{title}")

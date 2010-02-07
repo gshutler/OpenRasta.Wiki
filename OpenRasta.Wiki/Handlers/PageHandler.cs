@@ -19,14 +19,13 @@ namespace OpenRasta.Wiki.Handlers
             this.uriResolver = uriResolver;
         }
 
-        public PageResource Get(string title)
+        public object Get(string title)
         {
-            return pageRepository.Get(title) ?? DefaultPageResource(title);
-        }
+            var page = pageRepository.Get(title);
 
-        static PageResource DefaultPageResource(string title)
-        {
-            return new PageResource { Title = title, Content = PageResource.DefaultContent };
+            if (page != null) return page;
+
+            return new NewPageResource {Title = title};
         }
 
         // this would take a PageResource but there seems to be a binding bug in the version
@@ -37,9 +36,10 @@ namespace OpenRasta.Wiki.Handlers
 
             pageRepository.Save(resource);
 
-            var redirectLocation = uriResolver.CreateUriFor(context.ApplicationBaseUri, 
-                typeof (PageResource), null, resource.ToNameValueCollection());
-            
+            var redirectLocation = uriResolver.CreateUriFor(context.ApplicationBaseUri,
+                                                            typeof (PageResource), null,
+                                                            resource.ToNameValueCollection());
+
             return new OperationResult.SeeOther
                        {
                            RedirectLocation = redirectLocation
