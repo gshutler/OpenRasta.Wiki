@@ -13,10 +13,14 @@ namespace OpenRasta.Wiki.Handlers
             this.pageRepository = pageRepository;
         }
 
+        public SearchResultsResource Get()
+        {
+            return new SearchResultsResource();
+        }
+
         public SearchResultsResource Get(SearchResultsResource resource)
         {
             resource.PageResources = pageRepository.Query(resource.Query);
-
             return resource;
         }
     }

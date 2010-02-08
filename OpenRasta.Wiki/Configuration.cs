@@ -60,7 +60,7 @@ namespace OpenRasta.Wiki
 
                 ResourceSpace.Has.ResourcesOfType<SearchResultsResource>()
                     .AtUri("/search")
-                    .And.AtUri("/search/{query}")
+                    .And.AtUri("/search?q={query}")
                     .HandledBy<SearchHandler>()
                     .RenderedByAspx("~/Views/SearchResultsView.aspx");
             }
